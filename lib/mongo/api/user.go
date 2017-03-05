@@ -4,25 +4,29 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 	"../../mongo/db"
-	"../../mongo/model"
-
+	model "../../mongo/model"
+	"fmt"
 )
 
+type Param struct {
+	Id string
+	Pwd string
+}
 
-func GetUserByID(ctx string) {
-	id := ctx.Param("userid")
 
+func GetUserByID(data model.User) {
+	id := data.Uid
 	Db := db.MgoDb{}
 	Db.Init()
-
+	defer Db.Close()
 	result := model.User{}
 
-	if err := Db.C("people").Find(bson.M{"id": id}).One(&result); err != nil {
-		ctx.JSON(iris.StatusOK, model.Err("1"))
+	if err := Db.C("user").Find(bson.M{"id": id}).One(&result); err != nil {
+		fmt.Fprint("fail")
 		return
 	}
 
-	ctx.JSON(iris.StatusOK, &result)
+	fmt.Fprint(result)
 
-	Db.Close()
+
 }

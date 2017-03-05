@@ -7,6 +7,7 @@
         <option value="file://$PROJECT_DIR$/lib" />
         <option value="file://$PROJECT_DIR$/lib/mongo" />
         <option value="file://$PROJECT_DIR$/lib/mongo/db" />
+        <option value="file://$PROJECT_DIR$/lib/mqtt" />
       </list>
     </option>
   </component>
