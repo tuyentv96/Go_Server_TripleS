@@ -1,11 +1,13 @@
 package model
 
-type Mlogin struct {
+type Mcontrol struct {
 	Uid string
-	Pwd string
+	Did string
+	Status int
 }
 
-type Mloginrespond struct {
+type Mcontrolrespond struct {
 	Title string `json:"title"`
 	Rcode int `json:"rcode"`
 }
+

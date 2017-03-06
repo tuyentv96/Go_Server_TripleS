@@ -4,6 +4,9 @@ import (
 	"fmt"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	model "./model"
+//	modeldb "../mongo/model"
+//	"encoding/json"
+	api "./api"
 	"encoding/json"
 )
 
@@ -21,18 +24,14 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 	case "MLOGIN":
 		println("Login handler")
-		var m model.Mlogin
-		bytes:=	[]byte(payload)
 
-		err:=	json.Unmarshal(bytes,&m)
+		x:= api.MLoginHandle(info,payload)
+		p2,_:= json.Marshal(x)
+		x1:=info.Cid
+		t:="/RMLOGIN"
+		t2:= x1+t
+		client.Publish(t2,0,false,p2)
 
-		if err!=nil {
-			fmt.Print("Error json")
-			return
-
-		}
-
-		fmt.Print("Mogin",m)
 		break
 	case "MCONTROL":
 		print("Mcontrol handler")
