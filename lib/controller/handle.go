@@ -35,7 +35,36 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		break
 	case "MCONTROL":
 		print("Mcontrol handler")
+		value,datquery:= api.MControlHandle(info,payload)
+		fmt.Print("valueeee",value)
+		if value.Rcode==200 {
+			fmt.Printf("%+v", datquery)
+			fmt.Println("Continue send to home\n")
+			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did}
+			p2,_:= json.Marshal(sctrl)
+			x1:=info.Cid
+			t:="/SCONTROL"
+			t2:= x1+t
+			client.Publish(t2,0,false,p2)
+
+
+		}
 		break
+
+	case "RSCONTROL":
+		println("RSCONTROL topic")
+
+		rsp,datquery:= api.MControlRespondHandle(payload)
+		fmt.Print(rsp)
+
+		cid:=datquery.Cid
+		topic:=cid+"/RMCONTROL"
+		client.Publish(topic,0,false,rsp)
+
+	case "MGETDEVICE":
+
+
+
 
 	default:
 		print("Topic not found")
