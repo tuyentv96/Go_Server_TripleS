@@ -22,7 +22,6 @@ func main() {
 	mqttc.InitMqtt()
 
 
-	for true {
-	}
+	select{}
 
 }

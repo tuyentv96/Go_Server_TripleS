@@ -25,28 +25,27 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 	case "MLOGIN":
 		println("Login handler")
 
-		x:= api.MLoginHandle(info,payload)
-		p2,_:= json.Marshal(x)
-		x1:=info.Cid
-		t:="/RMLOGIN"
-		t2:= x1+t
-		client.Publish(t2,0,false,p2)
+		rsp:= api.MLoginHandle(info,payload)
+		payl,_:= json.Marshal(rsp)
+		rtopic:=info.Cid+"/RMLOGIN"
+		client.Publish(rtopic,0,false,payl)
 
 		break
 	case "MCONTROL":
 		print("Mcontrol handler")
 		value,datquery:= api.MControlHandle(info,payload)
-		fmt.Print("valueeee",value)
+		rtopic:="/RMCONTROL"
 		if value.Rcode==200 {
 			fmt.Printf("%+v", datquery)
 			fmt.Println("Continue send to home\n")
-			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did}
-			p2,_:= json.Marshal(sctrl)
-			x1:=info.Cid
-			t:="/SCONTROL"
-			t2:= x1+t
-			client.Publish(t2,0,false,p2)
+			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did,Hid:datquery.Hid}
+			payl,_:= json.Marshal(sctrl)
+			client.Publish(datquery.Hid+rtopic,0,false,payl)
 
+
+		} else {
+			payl,_:= json.Marshal(value)
+			client.Publish(info.Cid+rtopic,0,false,payl)
 
 		}
 		break
@@ -56,6 +55,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		rsp,datquery:= api.MControlRespondHandle(payload)
 		fmt.Print(rsp)
+		
 
 		cid:=datquery.Cid
 		topic:=cid+"/RMCONTROL"

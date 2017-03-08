@@ -2,6 +2,7 @@ package model
 
 type Mcontrol struct {
 	Uid string
+	Hid string
 	Did string
 	Status int
 }

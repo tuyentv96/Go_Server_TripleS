@@ -44,6 +44,12 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	}
 
+	if datquery.Hid!=m.Hid {
+		ret.Rcode=312
+		return ret,m
+
+	}
+
 	fmt.Printf("%+v", datquery)
 	ret.Rcode=200
 	return ret,m

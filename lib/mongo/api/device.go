@@ -28,7 +28,19 @@ func GetDeviceByDid(data string)  (model.Device,bool){
 	
 }
 
-func GetAllDeviceByUid(uid string)  {
+func GetAllDeviceByHid(hid string)  ([]model.Device,bool){
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+	result := []model.Device{}
+
+	if err := Db.C("devices").Find(bson.M{"hid": hid}).All(&result); err != nil {
+		print("Fail")
+		return result,true
+	}
+
+	fmt.Printf("%+v\n",result)
+	return result,false
 
 }
 
