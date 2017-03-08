@@ -34,18 +34,17 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 	case "MCONTROL":
 		print("Mcontrol handler")
 		value,datquery:= api.MControlHandle(info,payload)
-		rtopic:="/RMCONTROL"
 		if value.Rcode==200 {
 			fmt.Printf("%+v", datquery)
 			fmt.Println("Continue send to home\n")
 			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did,Hid:datquery.Hid}
 			payl,_:= json.Marshal(sctrl)
-			client.Publish(datquery.Hid+rtopic,0,false,payl)
+			client.Publish(datquery.Hid+"/SCONTROL",0,false,payl)
 
 
 		} else {
 			payl,_:= json.Marshal(value)
-			client.Publish(info.Cid+rtopic,0,false,payl)
+			client.Publish(info.Cid+"/RMCONTROL",0,false,payl)
 
 		}
 		break
