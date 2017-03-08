@@ -55,11 +55,15 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		rsp,datquery:= api.MControlRespondHandle(payload)
 		fmt.Print(rsp)
-		
+
 
 		cid:=datquery.Cid
 		topic:=cid+"/RMCONTROL"
 		client.Publish(topic,0,false,rsp)
+
+		topicsync:=datquery.Hid+"M/SYNC"
+		client.Publish(topicsync,0,false,datquery)
+
 
 	case "MGETDEVICE":
 
