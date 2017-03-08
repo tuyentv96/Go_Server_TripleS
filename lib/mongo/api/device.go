@@ -44,6 +44,23 @@ func GetAllDeviceByHid(hid string)  ([]model.Device,bool){
 
 }
 
+
+func GetAllHomeByUid(uid string)  (model.Userpsmdevice,bool){
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+	result := model.Userpsmdevice{}
+
+	if err := Db.C("users").Find(bson.M{"uid": uid}).One(&result); err != nil {
+		print("Fail")
+		return result,true
+	}
+
+	fmt.Printf("%+v\n",result)
+	return result,false
+
+}
+
 func UpdateStatusDevice(did string,status int)  bool{
 	id := did
 	Db := db.MgoDb{}

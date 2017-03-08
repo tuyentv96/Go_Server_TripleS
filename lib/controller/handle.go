@@ -65,10 +65,12 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		client.Publish(topicsync,0,false,paylsync)
 
 
-	case "MGETDEVICE":
+	case "MGETHOME":
 
+		println("MGETHOME topic")
 
-
+	case "SCONTROL":
+		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
 
 	default:
 		print("Topic not found")

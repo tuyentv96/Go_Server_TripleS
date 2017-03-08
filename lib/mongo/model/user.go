@@ -19,3 +19,4 @@ type Userpsmdevice struct {
 	UID   string `json:"uid"`
 	Uname string `json:"uname"`
 }
+
