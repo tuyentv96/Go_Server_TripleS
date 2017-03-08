@@ -61,7 +61,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		client.Publish(topic,0,false,payl)
 
 		paylsync,_:=json.Marshal(datquery)
-		topicsync:=datquery.Hid+"M/SYNC"
+		topicsync:=datquery.Hid+"/MSYNC"
 		client.Publish(topicsync,0,false,paylsync)
 
 
