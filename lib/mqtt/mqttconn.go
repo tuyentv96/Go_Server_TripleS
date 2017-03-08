@@ -68,7 +68,6 @@ func InitMqtt() MQTT.Client {
 		fmt.Println(token.Error())
 		os.Exit(1)
 	}
-	c.Publish("test",0,false,"nhucccccc")
 
 	return c
 }
