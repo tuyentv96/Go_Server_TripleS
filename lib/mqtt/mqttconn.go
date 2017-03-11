@@ -7,6 +7,7 @@ import (
 	handler "../../lib/controller"
 	model "../controller/model"
 	"strings"
+	"math/rand"
 
 )
 
@@ -50,9 +51,12 @@ var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message)
 func InitMqtt() MQTT.Client {
 
 	opts := MQTT.NewClientOptions().AddBroker(mqttbroker)
-	opts.SetClientID("Servertriples133223")
+	opts.SetClientID(string(rand.Intn(999999999)))
 	opts.SetDefaultPublishHandler(mqttReceive)
 	opts.SetAutoReconnect(true)
+	opts.SetCleanSession(true)
+
+
 	//opts.SetWill("tuyen","1234",0,true)
 
 	//create and start a client using the above ClientOptions

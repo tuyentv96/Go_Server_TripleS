@@ -86,3 +86,32 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 
 
 }
+
+func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
+
+	var m modelctrl.Control
+	bytes:=	[]byte(payload)
+
+	err:=	json.Unmarshal(bytes,&m)
+	ret:=modelctrl.Controlrsp{Title:"RCONTROL"}
+
+
+	if err!=nil {
+		//fmt.Print("Error json")
+		// Wrong format
+		ret.Rcode=100
+		return ret,m
+
+	}
+
+	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status)
+	if updateerr {
+		ret.Rcode=400
+		return ret,m
+	}
+
+	ret.Rcode=200
+	return ret,m
+
+
+}

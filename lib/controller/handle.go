@@ -65,9 +65,21 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		client.Publish(topicsync,0,false,paylsync)
 
 
-	case "MGETHOME":
+	case "CONTROL":
+		rsp,datquery:= api.ControlDevice(payload)
+		fmt.Print(rsp)
 
-		println("MGETHOME topic")
+		payl,_:= json.Marshal(rsp)
+		cid:=info.Cid
+		topic:=cid+"/RCONTROL"
+		client.Publish(topic,0,false,payl)
+
+		//Sync to mobile
+		if rsp.Rcode==200 {
+			client.Publish(datquery.Hid+"/MSYNC",0,false,payload)
+		}
+
+
 
 	case "SCONTROL":
 		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
