@@ -78,11 +78,25 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		if rsp.Rcode==200 {
 			client.Publish(datquery.Hid+"/MSYNC",0,false,payload)
 		}
-
-
-
+	/*
 	case "SCONTROL":
 		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
+		*/
+
+	case "HGOOFF":
+		println("home go off detected")
+		rsp:= api.HomeStatusRev(payload)
+		rsp.Status=0
+		payl,_ := json.Marshal(rsp)
+		client.Publish(rsp.Hid+"/MHSTATUS",0,false,payl)
+
+	case "HGOON":
+		println("home go on detected")
+		rsp:= api.HomeStatusRev(payload)
+		rsp.Status=1
+		payl,_ := json.Marshal(rsp)
+		client.Publish(rsp.Hid+"/MHSTATUS",0,false,payl)
+
 
 	default:
 		print("Topic not found")
