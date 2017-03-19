@@ -14,10 +14,10 @@ type Mgethomerespond struct {
 	Rcode int `json:"rcode"`
 	UID   string `json:"uid"`
 	Uname string `json:"uname"`
-	Types []struct {
+	Ltype []struct {
 		Hid  string `json:"hid"`
 		Type int    `json:"type"`
-	} `json:"type"`
+	} `json:"ltype"`
 	Ldevice []dbmodel.Device `json:"ldevice"`
 	Permission []struct {
 		Hid  string `json:"hid"`

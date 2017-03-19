@@ -15,10 +15,10 @@ type Device struct {
 type LDevice struct {
 	UID   string `json:"uid"`
 	Uname string `json:"uname"`
-	Types []struct {
+	Ltype []struct {
 		Hid  string `json:"hid"`
 		Type int    `json:"type"`
-	} `json:"type"`
+	} `json:"ltype"`
 	Ldevice []Device
 	Permission []struct {
 		Hid  string `json:"hid"`
