@@ -14,7 +14,7 @@ func MGetAllDevice(payload []byte)  (modelctrl.Mgethomerespond,bool) {
 	m:= modelctrl.Mgethome{}
 	bytes:=	[]byte(payload)
 
-	ret:= modelctrl.Mgethomerespond{}
+	ret:= modelctrl.Mgethomerespond{Title:"RMGETDEVICE"}
 
 	err:=	json.Unmarshal(bytes,&m)
 	if err!=nil {
@@ -28,7 +28,7 @@ func MGetAllDevice(payload []byte)  (modelctrl.Mgethomerespond,bool) {
 		ret.Rcode=201
 		return ret,true
 	}
-
+	ret.Rcode=200
 	ret.Ltype=data.Ltype
 	ret.Ldevice=data.Ldevice
 	ret.UID=data.UID
