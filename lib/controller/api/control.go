@@ -18,6 +18,8 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	err:=	json.Unmarshal(bytes,&m)
 	ret:=modelctrl.Mcontrolrespond{Title:"RMCONTROL"}
+	ret.Did=m.Did
+	ret.Hid=m.Hid
 
 	println("HELOOOO",m.Uid)
 
@@ -64,6 +66,8 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 
 	err:=	json.Unmarshal(bytes,&m)
 	ret:=modelctrl.Mcontrolrespond{Title:"RMCONTROL"}
+	ret.Did=m.Did
+	ret.Hid=m.Hid
 
 	println("HELOOOO",m.Uid)
 

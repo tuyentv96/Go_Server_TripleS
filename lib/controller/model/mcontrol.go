@@ -10,5 +10,7 @@ type Mcontrol struct {
 type Mcontrolrespond struct {
 	Title string `json:"title"`
 	Rcode int `json:"rcode"`
+	Did string `json:"did"`
+	Hid string `json:"hid"`
 }
 

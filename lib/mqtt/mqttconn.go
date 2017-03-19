@@ -7,7 +7,7 @@ import (
 	handler "../../lib/controller"
 	model "../controller/model"
 	"strings"
-	"math/rand"
+
 
 )
 
@@ -51,7 +51,7 @@ var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message)
 func InitMqtt() MQTT.Client {
 
 	opts := MQTT.NewClientOptions().AddBroker(mqttbroker)
-	opts.SetClientID(string(rand.Intn(999999999)))
+	opts.SetClientID("Mainserrrrr")
 	opts.SetDefaultPublishHandler(mqttReceive)
 	opts.SetAutoReconnect(true)
 	opts.SetCleanSession(true)
