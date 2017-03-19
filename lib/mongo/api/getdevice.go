@@ -27,8 +27,8 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 
 	lh:= [100]bson.M{}
 
-	for i:=0;i<len(result.Types);i++ {
-		temp:= bson.M{"hid":result.Types[i].Hid}
+	for i:=0;i<len(result.Ltype);i++ {
+		temp:= bson.M{"hid":result.Ltype[i].Hid}
 		lh[i]=temp
 		
 	}
