@@ -31,7 +31,11 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	}
 
-	dbapi.CheckPermissonControlDevice(m.Uid,m.Did)
+	if dbapi.CheckPermissonControlDevice(m.Uid,m.Did)==false {
+		ret.Rcode=111
+		return ret,m
+	}
+
 
 	datquery,queryerr:= dbapi.GetDeviceByDid(m.Did)
 

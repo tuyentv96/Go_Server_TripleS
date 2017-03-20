@@ -29,7 +29,7 @@ func MGetAllDevice(payload []byte)  (modelctrl.Mgethomerespond,bool) {
 		return ret,true
 	}
 	ret.Rcode=200
-	ret.Ltype=data.Ltype
+	ret.Lhome=data.Lhome
 	ret.Ldevice=data.Ldevice
 	ret.UID=data.UID
 	ret.Uname=data.Uname

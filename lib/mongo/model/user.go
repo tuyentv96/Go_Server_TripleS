@@ -8,10 +8,10 @@ type User struct {
 	}
 
 type Userpsmdevice struct {
-	Types []struct {
+	Lhome []struct {
 		Hid  string `json:"hid"`
 		Type int    `json:"type"`
-	} `json:"type"`
+	} `json:"lhome"`
 
 	UID   string `json:"uid"`
 	Uname string `json:"uname"`

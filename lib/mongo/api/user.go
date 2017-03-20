@@ -41,12 +41,12 @@ func CheckPermissonControlDevice(uid string,did string)  bool{
 	defer Db.Close()
 	result := model.Userpsmdevice{}
 
-	if err := Db.C("users").Find(bson.M{"uid": uid, "permission": bson.M{"$elemMatch": did}}).One(&result); err != nil {
+	if err := Db.C("users").Find(bson.M{"uid": uid, "permission": bson.M{"$elemMatch": bson.M{"did": did}}}).One(&result); err != nil {
 		print("Fail Check perrrrmsssionnn")
 		return false
 	}
 
-	fmt.Printf("Check perrrrmsssionnn%+v\n",result)
+	fmt.Printf("Check perrrrmsssionnn ok%+v\n",result)
 	return true
 }
 

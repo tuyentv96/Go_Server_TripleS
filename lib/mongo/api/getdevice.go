@@ -27,8 +27,8 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 
 	lh:= [100]bson.M{}
 
-	for i:=0;i<len(result.Ltype);i++ {
-		temp:= bson.M{"hid":result.Ltype[i].Hid}
+	for i:=0;i<len(result.Lhome);i++ {
+		temp:= bson.M{"hid":result.Lhome[i].Hid}
 		lh[i]=temp
 		
 	}
@@ -38,7 +38,6 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 		print("Fail")
 
 	}
-
 
 	result1,_:=json.Marshal(result)
 	fmt.Print(string(result1))
