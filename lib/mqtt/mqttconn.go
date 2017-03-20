@@ -4,9 +4,11 @@ import (
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	model "../controller/model"
 	"strings"
-
+	handler "../../lib/controller"
 	"math/rand"
 
+	"fmt"
+	"os"
 )
 
 
@@ -51,6 +53,43 @@ func CutTopic(topic string)  (info model.RqDetail,b bool){
 	}
 	return info,true
 
+}
+
+var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
+	//fmt.Printf("TOPIC: %s\n", msg.Topic())
+	//fmt.Printf("MSG: %s\n", msg.Payload())
+
+	info,errc:= CutTopic(msg.Topic())
+
+	if  errc{
+		fmt.Print("Topic not detect")
+		return
+	}
+
+	fmt.Print("Topic receive: ",info)
+
+	go handler.HandleRequest(client,info,msg.Payload())
+
+}
+
+func InitMqtt()  {
+	opts := MQTT.NewClientOptions().AddBroker(Mqttbroker)
+	opts.SetClientID(RandStringRunes(12))
+	opts.SetDefaultPublishHandler(mqttReceive)
+	opts.SetAutoReconnect(true)
+	opts.SetCleanSession(true)
+
+	//create and start a client using the above ClientOptions
+	c := MQTT.NewClient(opts)
+
+	if token := c.Connect(); token.Wait() && token.Error() != nil {
+		panic(token.Error())
+	}
+
+	if token := c.Subscribe("#", 0, nil); token.Wait() && token.Error() != nil {
+		fmt.Println(token.Error())
+		os.Exit(1)
+	}
 }
 
 
