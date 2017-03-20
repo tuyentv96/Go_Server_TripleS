@@ -22,20 +22,22 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 
 	if err := Db.C("users").Find(bson.M{"uid": id}).One(&result); err != nil {
 		print("Fail")
+		return result,true
 
 	}
 
-	lh:= [100]bson.M{}
+	lh:= []bson.M{}
 
 	for i:=0;i<len(result.Lhome);i++ {
 		temp:= bson.M{"hid":result.Lhome[i].Hid}
-		lh[i]=temp
+		lh=append(lh,temp)
 		
 	}
 
 	fmt.Print("BSSS",lh)
 	if err1 := Db.C("devices").Find(bson.M{"$or": lh}).All(&result.Ldevice); err1 != nil {
 		print("Fail")
+		return result,true
 
 	}
 
