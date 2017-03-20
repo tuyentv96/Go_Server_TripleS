@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	handler "../../Go/Go_Server_tripleS/lib/controller"
-	mqttlib "../../Go/Go_Server_tripleS/lib/mqtt"
+	handler "./lib/controller"
+	mqttlib "./lib/mqtt"
 	"os"
 )
 
