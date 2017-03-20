@@ -119,3 +119,12 @@ func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
 
 
 }
+
+func MSync(hid string,did string,status int)  modelctrl.Msync{
+	ret:=modelctrl.Msync{Title:"MSYNC"}
+	ret.Hid=hid
+	ret.Did=did
+	ret.Status=status
+
+	return ret
+}

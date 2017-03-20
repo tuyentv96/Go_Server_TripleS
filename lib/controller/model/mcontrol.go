@@ -14,3 +14,9 @@ type Mcontrolrespond struct {
 	Hid string `json:"hid"`
 }
 
+type Msync struct {
+	Title string `json:"title"`
+	Did string `json:"did"`
+	Hid string `json:"hid"`
+	Status int `json:"status"`
+}

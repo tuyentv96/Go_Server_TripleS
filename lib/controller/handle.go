@@ -55,12 +55,15 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		rsp,datquery:= api.MControlRespondHandle(payload)
 		fmt.Print(rsp)
 
+
 		payl,_:= json.Marshal(rsp)
 		cid:=datquery.Cid
 		topic:=cid+"/RMCONTROL"
 		client.Publish(topic,0,false,payl)
 
-		paylsync,_:=json.Marshal(datquery)
+		msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
+
+		paylsync,_:=json.Marshal(msyncdata)
 		topicsync:=datquery.Hid+"/MSYNC"
 		client.Publish(topicsync,0,false,paylsync)
 
@@ -69,14 +72,20 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		rsp,datquery:= api.ControlDevice(payload)
 		fmt.Print(rsp)
 
+
 		payl,_:= json.Marshal(rsp)
 		cid:=info.Cid
 		topic:=cid+"/RCONTROL"
 		client.Publish(topic,0,false,payl)
 
+		msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
+
+		paylsync,_:=json.Marshal(msyncdata)
+		topicsync:=datquery.Hid+"/MSYNC"
+
 		//Sync to mobile
 		if rsp.Rcode==200 {
-			client.Publish(datquery.Hid+"/MSYNC",0,false,payload)
+			client.Publish(topicsync,0,false,paylsync)
 		}
 
 	case "SCONTROL":
