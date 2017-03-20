@@ -8,7 +8,7 @@ import (
 //	"encoding/json"
 	api "./api"
 	"encoding/json"
-//	mqttlib "../mqtt"
+	mqttlib "../mqtt/api"
 
 )
 
@@ -21,11 +21,12 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 	case "MLOGIN":
 		println("Login handler")
+		//mqttlib.MqttPublishSingle
 
 		rsp:= api.MLoginHandle(info,payload)
 		payl,_:= json.Marshal(rsp)
 		rtopic:=info.Cid+"/RMLOGIN"
-		client.Publish(rtopic,0,false,payl)
+		mqttlib.MqttPublishSingle(rtopic,0,false,payl)
 
 		break
 	case "MCONTROL":
@@ -36,12 +37,12 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 			fmt.Println("Continue send to home\n")
 			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did,Hid:datquery.Hid}
 			payl,_:= json.Marshal(sctrl)
-			client.Publish(datquery.Hid+"/SCONTROL",0,false,payl)
+			mqttlib.MqttPublishSingle(datquery.Hid+"/SCONTROL",0,false,payl)
 
 
 		} else {
 			payl,_:= json.Marshal(value)
-			client.Publish(info.Cid+"/RMCONTROL",0,false,payl)
+			mqttlib.MqttPublishSingle(info.Cid+"/RMCONTROL",0,false,payl)
 
 		}
 		break
@@ -56,13 +57,13 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		payl,_:= json.Marshal(rsp)
 		cid:=datquery.Cid
 		topic:=cid+"/RMCONTROL"
-		client.Publish(topic,0,false,payl)
+		mqttlib.MqttPublishSingle(topic,0,false,payl)
 
 		msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
 
 		paylsync,_:=json.Marshal(msyncdata)
 		topicsync:=datquery.Hid+"/MSYNC"
-		client.Publish(topicsync,0,false,paylsync)
+		mqttlib.MqttPublishSingle(topicsync,0,false,paylsync)
 
 
 	case "CONTROL":
@@ -73,7 +74,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		payl,_:= json.Marshal(rsp)
 		cid:=info.Cid
 		topic:=cid+"/RCONTROL"
-		client.Publish(topic,0,false,payl)
+		mqttlib.MqttPublishSingle(topic,0,false,payl)
 
 		msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
 
@@ -82,11 +83,11 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		//Sync to mobile
 		if rsp.Rcode==200 {
-			client.Publish(topicsync,0,false,paylsync)
+			mqttlib.MqttPublishSingle(topicsync,0,false,paylsync)
 		}
 
 	case "SCONTROL":
-		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
+		mqttlib.MqttPublishSingle(info.Cid+"/RSCONTROL",0,false,payload)
 
 
 	case "HGOOFF":
@@ -94,14 +95,14 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		rsp:= api.HomeStatusRev(payload)
 		rsp.Status=0
 		payl,_ := json.Marshal(rsp)
-		client.Publish(rsp.Hid+"/MHSTATUS",0,false,payl)
+		mqttlib.MqttPublishSingle(rsp.Hid+"/MHSTATUS",0,false,payl)
 
 	case "HGOON":
 		println("home go on detected")
 		rsp:= api.HomeStatusRev(payload)
 		rsp.Status=1
 		payl,_ := json.Marshal(rsp)
-		client.Publish(rsp.Hid+"/MHSTATUS",0,false,payl)
+		mqttlib.MqttPublishSingle(rsp.Hid+"/MHSTATUS",0,false,payl)
 
 	case "MGETDEVICE":
 		println("mgetdevice !!")
@@ -109,7 +110,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		payl,_ := json.Marshal(rsp)
 
-		client.Publish(info.Cid+"/RMGETDEVICE",0,false,payl)
+		mqttlib.MqttPublishSingle(info.Cid+"/RMGETDEVICE",0,false,payl)
 
 
 	default:
