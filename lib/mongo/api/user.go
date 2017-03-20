@@ -34,6 +34,22 @@ func GetUserByID(data model.User) (model.User,bool){
 
 }
 
+func CheckPermissonControlDevice(uid string,did string)  bool{
+
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+	result := model.Userpsmdevice{}
+
+	if err := Db.C("users").Find(bson.M{"uid": uid, "permission": bson.M{"$elemMatch": did}}).One(&result); err != nil {
+		print("Fail Check perrrrmsssionnn")
+		return false
+	}
+
+	fmt.Printf("Check perrrrmsssionnn%+v\n",result)
+	return true
+}
+
 func GetUserPermissionByID(uid string) (model.Userpsmdevice,bool){
 
 	Db := db.MgoDb{}

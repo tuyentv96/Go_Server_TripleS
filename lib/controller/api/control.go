@@ -31,6 +31,8 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	}
 
+	dbapi.CheckPermissonControlDevice(m.Uid,m.Did)
+
 	datquery,queryerr:= dbapi.GetDeviceByDid(m.Did)
 
 	fmt.Printf("%+v",datquery)
@@ -38,6 +40,12 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 	if queryerr {
 		ret.Rcode=102
 		return ret,m
+	}
+
+	if !(m.Status>=0 && m.Status<=1) {
+		ret.Rcode=100
+		return ret,m
+
 	}
 
 	if datquery.Status==m.Status {
@@ -79,6 +87,12 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 
 	}
 
+	if !(m.Status>=0 && m.Status<=1) {
+		ret.Rcode=100
+		return ret,m
+
+	}
+
 	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status)
 	if updateerr {
 		ret.Rcode=400
@@ -103,6 +117,12 @@ func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
 	if err!=nil {
 		//fmt.Print("Error json")
 		// Wrong format
+		ret.Rcode=100
+		return ret,m
+
+	}
+
+	if !(m.Status>=0 && m.Status<=1) {
 		ret.Rcode=100
 		return ret,m
 
