@@ -31,7 +31,7 @@ var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message)
 
 func InitMqtt()  {
 	opts := MQTT.NewClientOptions().AddBroker(utils.Mqttbroker)
-	opts.SetClientID(utils.RandStringRunes(12))
+	opts.SetClientID(utils.RandStringRunes(14))
 	opts.SetDefaultPublishHandler(mqttReceive)
 	opts.SetAutoReconnect(true)
 	opts.SetCleanSession(true)
@@ -47,6 +47,8 @@ func InitMqtt()  {
 		fmt.Println(token.Error())
 		os.Exit(1)
 	}
+
+	fmt.Print("connnect ok")
 }
 
 

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78bf6ddc-d198-4c0d-9d0d-6f5b72e31cd0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controller/handle.go" afterPath="$PROJECT_DIR$/lib/controller/handle.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mqtt/mqttconn.go" afterPath="$PROJECT_DIR$/lib/mqtt/mqttconn.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
