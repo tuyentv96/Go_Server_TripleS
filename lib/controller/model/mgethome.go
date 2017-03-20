@@ -18,7 +18,7 @@ type Mgethomerespond struct {
 		Hid  string `json:"hid"`
 		Type int    `json:"type"`
 	} `json:"lhome"`
-	Ldevice []dbmodel.Device
+	Ldevice []dbmodel.Device `json:"ldevice"`
 	Permission []struct {
 		Hid  string `json:"hid"`
 		Did string    `json:"did"`
