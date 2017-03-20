@@ -20,6 +20,7 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 	ret:=modelctrl.Mcontrolrespond{Title:"RMCONTROL"}
 	ret.Did=m.Did
 	ret.Hid=m.Hid
+	ret.Status=m.Status
 
 	println("HELOOOO",m.Uid)
 
@@ -80,6 +81,7 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 	ret:=modelctrl.Mcontrolrespond{Title:"RMCONTROL"}
 	ret.Did=m.Did
 	ret.Hid=m.Hid
+	ret.Status=m.Status
 
 	println("HELOOOO",m.Uid)
 

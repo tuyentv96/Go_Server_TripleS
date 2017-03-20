@@ -12,6 +12,7 @@ type Mcontrolrespond struct {
 	Rcode int `json:"rcode"`
 	Did string `json:"did"`
 	Hid string `json:"hid"`
+	Status int `json:"status"`
 }
 
 type Msync struct {
