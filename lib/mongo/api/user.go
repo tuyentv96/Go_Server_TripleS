@@ -5,8 +5,6 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"../../mongo/db"
 	model "../../mongo/model"
-
-	"fmt"
 )
 
 type Param struct {
@@ -28,7 +26,7 @@ func GetUserByID(data model.User) (model.User,bool){
 	}
 
 	print(result.Pwd)
-	fmt.Printf("%+v\n",result)
+	//fmt.Printf("%+v\n",result)
 	return result,false
 
 
@@ -46,7 +44,7 @@ func CheckPermissonControlDevice(uid string,did string)  bool{
 		return false
 	}
 
-	fmt.Printf("Check perrrrmsssionnn ok%+v\n",result)
+	//fmt.Printf("Check perrrrmsssionnn ok%+v\n",result)
 	return true
 }
 
@@ -62,7 +60,7 @@ func GetUserPermissionByID(uid string) (model.Userpsmdevice,bool){
 		return result,true
 	}
 
-	fmt.Printf("%+v\n",result)
+	//fmt.Printf("%+v\n",result)
 	return result,false
 
 

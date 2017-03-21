@@ -33,8 +33,8 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		print("Mcontrol handler")
 		value,datquery:= api.MControlHandle(info,payload)
 		if value.Rcode==200 {
-			fmt.Printf("%+v", datquery)
-			fmt.Println("Continue send to home\n")
+			//fmt.Printf("%+v", datquery)
+			//fmt.Println("Continue send to home\n")
 			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did,Hid:datquery.Hid}
 			payl,_:= json.Marshal(sctrl)
 
@@ -52,7 +52,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		println("RSCONTROL topic")
 
 		rsp,datquery:= api.MControlRespondHandle(payload)
-		fmt.Print(rsp)
+		//fmt.Print(rsp)
 
 
 		payl,_:= json.Marshal(rsp)

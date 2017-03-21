@@ -24,13 +24,13 @@ func RandStringRunes(n int) string {
 
 
 
-func CutTopic(topic string)  (info model.RqDetail,b bool){
+func CutTopic(topic string,info *model.RqDetail)  (bool){
 	index:= strings.Index(topic,"/")
 	if  index>-1 {
 		info.Topic=topic[index+1:]
 		info.Cid=topic[:index]
-		return info,false
+		return false
 	}
-	return info,true
+	return true
 
 }

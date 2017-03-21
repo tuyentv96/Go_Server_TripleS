@@ -5,11 +5,8 @@ import (
 
 	modelctrl "../../controller/model"
 	dbapi "../../mongo/api"
-//	modeldb "../../mongo/model"
-
-	//	"fmt"
 	"encoding/json"
-	"fmt"
+
 )
 
 func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontrolrespond,modelctrl.Mcontrol){
@@ -22,7 +19,7 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 	ret.Hid=m.Hid
 	ret.Status=m.Status
 
-	println("HELOOOO",m.Uid)
+	//println("HELOOOO",m.Uid)
 
 	if err!=nil {
 		//fmt.Print("Error json")
@@ -40,7 +37,7 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	datquery,queryerr:= dbapi.GetDeviceByDid(m.Did)
 
-	fmt.Printf("%+v",datquery)
+	//fmt.Printf("%+v",datquery)
 
 	if queryerr {
 		ret.Rcode=102
@@ -65,7 +62,7 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	}
 
-	fmt.Printf("%+v", datquery)
+	//fmt.Printf("%+v", datquery)
 	ret.Rcode=200
 	return ret,m
 
@@ -83,7 +80,7 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 	ret.Hid=m.Hid
 	ret.Status=m.Status
 
-	println("HELOOOO",m.Uid)
+	//println("HELOOOO",m.Uid)
 
 	if err!=nil {
 		//fmt.Print("Error json")

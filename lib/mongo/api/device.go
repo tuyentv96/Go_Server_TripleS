@@ -5,8 +5,6 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"../../mongo/db"
 	model "../../mongo/model"
-
-	"fmt"
 )
 
 func GetDeviceByDid(data string)  (model.Device,bool){
@@ -23,7 +21,7 @@ func GetDeviceByDid(data string)  (model.Device,bool){
 	}
 
 	print(result.Did)
-	fmt.Printf("%+v\n",result)
+	//fmt.Printf("%+v\n",result)
 	return result,false
 	
 }
@@ -39,7 +37,7 @@ func GetAllDeviceByHid(hid string)  ([]model.Device,bool){
 		return result,true
 	}
 
-	fmt.Printf("%+v\n",result)
+	//fmt.Printf("%+v\n",result)
 	return result,false
 
 }
@@ -56,7 +54,7 @@ func GetAllHomeByUid(uid string)  (model.Userpsmdevice,bool){
 		return result,true
 	}
 
-	fmt.Printf("%+v\n",result)
+	//fmt.Printf("%+v\n",result)
 	return result,false
 
 }

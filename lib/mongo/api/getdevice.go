@@ -5,10 +5,6 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"../../mongo/db"
 	model "../../mongo/model"
-
-	"fmt"
-//	"encoding/json"
-	"encoding/json"
 )
 
 func MGetAllDevice(data string)  (model.LDevice,bool){
@@ -34,15 +30,15 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 		
 	}
 
-	fmt.Print("BSSS",lh)
+	//fmt.Print("BSSS",lh)
 	if err1 := Db.C("devices").Find(bson.M{"$or": lh}).All(&result.Ldevice); err1 != nil {
 		print("Fail")
 		return result,true
 
 	}
 
-	result1,_:=json.Marshal(result)
-	fmt.Print(string(result1))
+	//result1,_:=json.Marshal(result)
+	//fmt.Print(string(result1))
 
 	return result,false
 

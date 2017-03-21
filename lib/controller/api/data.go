@@ -3,11 +3,8 @@ package api
 import (
 	modelctrl "../../controller/model"
 	dbapi "../../mongo/api"
-	//	modeldb "../../mongo/model"
-
-	//	"fmt"
 	"encoding/json"
-	"fmt"
+
 )
 
 func MGetAllDevice(payload []byte)  (modelctrl.Mgethomerespond,bool) {
@@ -35,7 +32,7 @@ func MGetAllDevice(payload []byte)  (modelctrl.Mgethomerespond,bool) {
 	ret.Uname=data.Uname
 	ret.Permission=data.Permission
 
-	fmt.Print("Return value:",ret)
+	//fmt.Print("Return value:",ret)
 
 	return ret,false
 

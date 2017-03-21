@@ -9,7 +9,7 @@ import (
 
 func main() {
 	fmt.Print("Started server!!!\n")
-	mqttlib.InitMqtt()
+	go mqttlib.InitMqtt()
 
 	// Loop forever
 	select {
