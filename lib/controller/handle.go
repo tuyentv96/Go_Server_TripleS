@@ -4,8 +4,6 @@ import (
 	"fmt"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	model "./model"
-//	modeldb "../mongo/model"
-//	"encoding/json"
 	api "./api"
 	"encoding/json"
 	//mqttlib "../mqtt/api"
@@ -16,7 +14,6 @@ import (
 
 func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
-	fmt.Println("FFFF")
 	switch info.Topic {
 
 	case "MLOGIN":

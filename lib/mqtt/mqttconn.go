@@ -7,6 +7,8 @@ import (
 	"fmt"
 	utils "./api"
 	"os"
+	"time"
+//	"go/token"
 )
 
 var topics  = map[string]byte{
@@ -22,8 +24,12 @@ var topics  = map[string]byte{
 
 }
 
+var MainMqttC MainMqttClient
 
-
+type MainMqttClient struct {
+	client MQTT.Client
+	opt *MQTT.ClientOptions
+}
 
 var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 	//fmt.Printf("TOPIC: %s\n", msg.Topic())
@@ -41,12 +47,29 @@ var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message)
 
 }
 
+func mqttOnConnect(client MQTT.Client) {
+	print("connected to broker")
+}
+
+func mqttLostConnect(client MQTT.Client,err error) {
+	print("disconnect to broker")
+
+}
+
+
+
+
 func InitMqtt()  {
+	cid:= string(string(time.Now().Unix())+utils.RandStringRunes(15))
+	print("cid:",cid)
 	opts := MQTT.NewClientOptions().AddBroker(utils.Mqttbroker)
-	opts.SetClientID(utils.RandStringRunes(10))
+	opts.SetClientID(cid)
 	opts.SetDefaultPublishHandler(mqttReceive)
 	opts.SetAutoReconnect(true)
 	opts.SetCleanSession(true)
+	opts.SetOnConnectHandler(mqttOnConnect)
+	opts.SetConnectionLostHandler(mqttLostConnect)
+
 
 	//create and start a client using the above ClientOptions
 	c := MQTT.NewClient(opts)
@@ -54,20 +77,16 @@ func InitMqtt()  {
 	if token := c.Connect(); token.Wait() && token.Error() != nil {
 		panic(token.Error())
 	}
-	/*
-	if token := c.Subscribe("#", 0, nil); token.Wait() && token.Error() != nil {
-		fmt.Println(token.Error())
-		os.Exit(1)
-	}
-	*/
+
 
 	if token :=c.SubscribeMultiple(topics,nil); token.Wait() && token.Error() != nil {
 		fmt.Println(token.Error())
 		os.Exit(1)
 	}
 
-
 	fmt.Print("connnect ok")
+
 }
+
 
 
