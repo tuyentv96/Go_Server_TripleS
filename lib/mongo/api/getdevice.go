@@ -31,7 +31,7 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 	}
 
 	//fmt.Print("BSSS",lh)
-	if err1 := Db.C("devices").Find(bson.M{"$or": lh}).Sort("dname").All(&result.Ldevice); err1 != nil {
+	if err1 := Db.C("devices").Find(bson.M{"$or": lh}).Sort("hid","dname").All(&result.Ldevice); err1 != nil {
 		print("Fail")
 		return result,true
 

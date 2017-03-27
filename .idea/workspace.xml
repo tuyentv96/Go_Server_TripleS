@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78bf6ddc-d198-4c0d-9d0d-6f5b72e31cd0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/controller/model/home.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controller/api/control.go" afterPath="$PROJECT_DIR$/lib/controller/api/control.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controller/api/data.go" afterPath="$PROJECT_DIR$/lib/controller/api/data.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controller/handle.go" afterPath="$PROJECT_DIR$/lib/controller/handle.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/controller/model/scontrol.go" afterPath="$PROJECT_DIR$/lib/controller/model/scontrol.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mongo/api/getdevice.go" afterPath="$PROJECT_DIR$/lib/mongo/api/getdevice.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mongo/model/device.go" afterPath="$PROJECT_DIR$/lib/mongo/model/device.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mqtt/mqttconn.go" afterPath="$PROJECT_DIR$/lib/mqtt/mqttconn.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/redis/api/control.go" afterPath="$PROJECT_DIR$/lib/redis/api/control.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/redis/db/db.go" afterPath="$PROJECT_DIR$/lib/redis/db/db.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.go" afterPath="$PROJECT_DIR$/main.go" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,6 +31,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="getdevice.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/mongo/api/getdevice.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="data.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/controller/api/data.go">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,13 +53,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="handle.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="handle.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/controller/handle.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="117" column="0" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+            <state relative-caret-position="216">
+              <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
               <folding>
                 <element signature="e#20#185#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="control.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/controller/api/control.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-362">
+              <caret line="104" column="22" lean-forward="false" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mgethome.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/controller/model/mgethome.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="5" selection-end-column="1" />
+              <folding>
+                <element signature="e#15#55#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,21 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="db.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/redis/db/db.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
               <caret line="15" column="36" lean-forward="false" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mlogin.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/controller/model/mlogin.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -111,26 +124,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mcontrol.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/controller/model/mcontrol.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="homestatus.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/controller/model/homestatus.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -199,13 +192,13 @@
         <option value="$PROJECT_DIR$/lib/controller/api/control.go" />
         <option value="$PROJECT_DIR$/lib/redis/api/control.go" />
         <option value="$PROJECT_DIR$/lib/mongo/model/device.go" />
-        <option value="$PROJECT_DIR$/lib/mongo/api/getdevice.go" />
         <option value="$PROJECT_DIR$/lib/controller/model/home.go" />
-        <option value="$PROJECT_DIR$/lib/controller/handle.go" />
         <option value="$PROJECT_DIR$/lib/controller/api/data.go" />
         <option value="$PROJECT_DIR$/lib/mqtt/mqttconn.go" />
         <option value="$PROJECT_DIR$/lib/mqtt/api/utils.go" />
         <option value="$PROJECT_DIR$/lib/redis/db/db.go" />
+        <option value="$PROJECT_DIR$/lib/mongo/api/getdevice.go" />
+        <option value="$PROJECT_DIR$/lib/controller/handle.go" />
       </list>
     </option>
   </component>
@@ -831,34 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mongo/api/getdevice.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="46" column="11" lean-forward="false" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
-          <folding>
-            <element signature="e#13#93#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controller/api/control.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="104" column="22" lean-forward="false" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controller/model/mgethome.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="5" selection-end-column="1" />
-          <folding>
-            <element signature="e#15#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controller/model/scontrol.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -909,16 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controller/handle.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="117" column="0" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding>
-            <element signature="e#20#185#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/controller/api/data.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
@@ -952,6 +907,42 @@
         <state relative-caret-position="204">
           <caret line="15" column="36" lean-forward="false" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controller/api/control.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-362">
+          <caret line="104" column="22" lean-forward="false" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controller/model/mgethome.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="5" selection-end-column="1" />
+          <folding>
+            <element signature="e#15#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mongo/api/getdevice.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controller/handle.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#185#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
