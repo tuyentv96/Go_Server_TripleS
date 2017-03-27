@@ -37,3 +37,29 @@ func MGetAllDevice(payload []byte)  (modelctrl.Mgethomerespond,bool) {
 	return ret,false
 
 }
+
+func HomeGetAllDevice(payload []byte)  (result modelctrl.LHomeDeviceRsp){
+	rqmodel:= modelctrl.LHomeDevice{}
+	bytes:=	[]byte(payload)
+
+	result.Title="RGETDEVICE"
+
+	if err:=json.Unmarshal(bytes,&rqmodel); err!=nil {
+		println("parse json fail")
+		result.Rcode=100
+		return result
+	}
+
+	ldev,err:= dbapi.GetAllDevice(rqmodel.Hid)
+
+	if err {
+		result.Rcode=201
+		return result
+	}
+
+	result.Rcode=200
+	result.Ldevice=ldev
+
+	return result
+
+}

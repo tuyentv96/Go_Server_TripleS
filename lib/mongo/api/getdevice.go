@@ -42,5 +42,20 @@ func MGetAllDevice(data string)  (model.LDevice,bool){
 
 	return result,false
 
+}
+
+func GetAllDevice(hid string)  (ldevice []model.Device,err bool){
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+
+
+	if err := Db.C("devices").Find(bson.M{"hid": hid}).All(&ldevice); err != nil {
+		print("Fail")
+		return ldevice,true
+
+	}
+
+	return ldevice,false
 
 }

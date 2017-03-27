@@ -8,7 +8,6 @@ import (
 	utils "./api"
 	"os"
 	"time"
-//	"go/token"
 )
 
 var topics  = map[string]byte{
@@ -21,6 +20,7 @@ var topics  = map[string]byte{
 	"+/HGOOFF":   0,
 	"+/HGOON": 0,
 	"+/MGETDEVICE": 0,
+	"+/GETDEVICE": 0,
 
 }
 
@@ -30,6 +30,7 @@ type MainMqttClient struct {
 	client MQTT.Client
 	opt *MQTT.ClientOptions
 }
+
 
 var mqttReceive MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 	//fmt.Printf("TOPIC: %s\n", msg.Topic())
@@ -54,13 +55,14 @@ func mqttOnConnect(client MQTT.Client) {
 func mqttLostConnect(client MQTT.Client,err error) {
 	print("disconnect to broker")
 
+
 }
 
 
 
 
 func InitMqtt()  {
-	cid:= string(string(time.Now().Unix())+utils.RandStringRunes(15))
+	cid:= string(string(time.Now().Unix())+utils.RandStringRunes(12))
 	print("cid:",cid)
 	opts := MQTT.NewClientOptions().AddBroker(utils.Mqttbroker)
 	opts.SetClientID(cid)
@@ -84,7 +86,9 @@ func InitMqtt()  {
 		os.Exit(1)
 	}
 
+	MainMqttC.client=c
 	fmt.Print("connnect ok")
+
 
 }
 

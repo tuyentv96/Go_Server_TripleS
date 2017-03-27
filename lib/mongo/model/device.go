@@ -26,4 +26,8 @@ type LDevice struct {
 	} `json:"permission"`
 }
 
+type LHomeDevice struct {
+	Ldevice []Device `json:"ldevice"`
+}
+
 

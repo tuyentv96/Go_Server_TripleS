@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	//mqttlib "../mqtt/api"
 
+//	"github.com/go-redis/redis"
 )
 
 
@@ -30,9 +31,11 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		print("Mcontrol handler")
 		value,datquery:= api.MControlHandle(info,payload)
 		if value.Rcode==200 {
+
+
 			//fmt.Printf("%+v", datquery)
 			//fmt.Println("Continue send to home\n")
-			sctrl:= model.Scontrol{Cid:info.Cid,Uid:datquery.Uid,Status:datquery.Status,Did:datquery.Did,Hid:datquery.Hid}
+			sctrl:= model.Scontrol{Status:datquery.Status,Did:datquery.Did,Hid:datquery.Hid}
 			payl,_:= json.Marshal(sctrl)
 
 			client.Publish(datquery.Hid+"/SCONTROL",0,false,payl)
@@ -48,12 +51,11 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 	case "RSCONTROL":
 		println("RSCONTROL topic")
 
-		rsp,datquery:= api.MControlRespondHandle(payload)
-		//fmt.Print(rsp)
-
+		rsp,datquery,uid,cid:= api.MControlRespondHandle(payload)
+		fmt.Print("uiddddd",uid)
+//		redis.GetControlSignalExpire(datquery.Did)
 
 		payl,_:= json.Marshal(rsp)
-		cid:=datquery.Cid
 		topic:=cid+"/RMCONTROL"
 		client.Publish(topic,0,false,payl)
 
@@ -83,10 +85,10 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		if rsp.Rcode==200 {
 			client.Publish(topicsync,0,false,paylsync)
 		}
-
+	/*
 	case "SCONTROL":
 		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
-
+	*/
 
 	case "HGOOFF":
 		println("home go off detected")
@@ -109,6 +111,14 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		payl,_ := json.Marshal(rsp)
 
 		client.Publish(info.Cid+"/RMGETDEVICE",0,false,payl)
+
+	case "GETDEVICE":
+		println("getdevice !!!")
+		rsp:= api.HomeGetAllDevice(payload)
+
+		payl,_ := json.Marshal(rsp)
+
+		client.Publish(info.Cid+"/RGETDEVICE",0,false,payl)
 
 
 	default:

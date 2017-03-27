@@ -6,7 +6,8 @@ import (
 	modelctrl "../../controller/model"
 	dbapi "../../mongo/api"
 	"encoding/json"
-
+	redis "../../redis/api"
+	"fmt"
 )
 
 func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontrolrespond,modelctrl.Mcontrol){
@@ -28,7 +29,14 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 		return ret,m
 
 	}
+	// Check device is ready to control
 
+	if redis.DeviceIsControlling(m.Did){
+		ret.Rcode=155
+		return ret,m
+	}
+
+	//Check permission for user to control device
 	if dbapi.CheckPermissonControlDevice(m.Uid,m.Did)==false {
 		ret.Rcode=111
 		return ret,m
@@ -62,6 +70,8 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 	}
 
+	redis.SaveControlSignalExpire(m.Uid,ctrlm.Cid,datquery.Did,datquery.Status)
+
 	//fmt.Printf("%+v", datquery)
 	ret.Rcode=200
 	return ret,m
@@ -69,7 +79,7 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 }
 
-func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl.Scontrol){
+func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl.Scontrol,string,string){
 
 	var m modelctrl.Scontrol
 	bytes:=	[]byte(payload)
@@ -80,30 +90,41 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 	ret.Hid=m.Hid
 	ret.Status=m.Status
 
-	//println("HELOOOO",m.Uid)
+
 
 	if err!=nil {
-		//fmt.Print("Error json")
+		fmt.Print("Error json")
 		// Wrong format
 		ret.Rcode=100
-		return ret,m
+		return ret,m,"",""
 
+	}
+	println("HELOOOO")
+	uid,cid,rderr:= redis.GetControlSignalExpire(m.Did)
+
+	print("uidneee",uid,cid)
+
+	if rderr {
+		ret.Rcode=400
+		return ret,m,"",""
 	}
 
 	if !(m.Status>=0 && m.Status<=1) {
 		ret.Rcode=100
-		return ret,m
+		return ret,m,"",""
 
 	}
 
 	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status)
 	if updateerr {
 		ret.Rcode=400
-		return ret,m
+		return ret,m,"",""
 	}
 
+	redis.GetControlSignalExpire(m.Did)
+
 	ret.Rcode=200
-	return ret,m
+	return ret,m,uid,cid
 
 
 }
@@ -124,6 +145,7 @@ func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
 		return ret,m
 
 	}
+
 
 	if !(m.Status>=0 && m.Status<=1) {
 		ret.Rcode=100
