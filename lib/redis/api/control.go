@@ -41,6 +41,8 @@ func GetControlSignalExpire(did string)  (uid string,cid string,err bool){
 		return uid,cid,true
 	}
 
+	db.RedCli().Del(did+"S")
+
 	print(uid,cid)
 
 	return uid,cid,false

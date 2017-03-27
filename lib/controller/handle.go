@@ -85,7 +85,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		if rsp.Rcode==200 {
 			client.Publish(topicsync,0,false,paylsync)
 		}
-
+	
 	case "SCONTROL":
 		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
 
