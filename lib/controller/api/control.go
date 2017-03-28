@@ -79,6 +79,31 @@ func MControlHandle(ctrlm modelctrl.RqDetail,payload []byte)  (modelctrl.Mcontro
 
 }
 
+func Check_Type_Control(payload []byte)  int{
+	var m modelctrl.Control
+	bytes:=	[]byte(payload)
+
+	err:=	json.Unmarshal(bytes,&m)
+
+
+	if err!=nil {
+		//fmt.Print("Error json")
+		// Wrong format
+		return 0
+
+	}
+
+	uid,cid,rderr:= redis.GetControlSignalExpire(m.Did)
+
+	print("uidneee",uid,cid,rderr)
+
+	if rderr {
+		return 2
+	}
+
+	return 1
+}
+
 func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl.Scontrol,string,string){
 
 	var m modelctrl.Scontrol
@@ -164,6 +189,7 @@ func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
 
 
 }
+
 
 func MSync(hid string,did string,status int)  modelctrl.Msync{
 	ret:=modelctrl.Msync{Title:"MSYNC"}

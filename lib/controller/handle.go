@@ -47,7 +47,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		}
 		break
-
+/*
 	case "RSCONTROL":
 		println("RSCONTROL topic")
 
@@ -64,30 +64,54 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		paylsync,_:=json.Marshal(msyncdata)
 		topicsync:=datquery.Hid+"/MSYNC"
 		client.Publish(topicsync,0,false,paylsync)
-
+*/
 
 	case "CONTROL":
-		rsp,datquery:= api.ControlDevice(payload)
-		fmt.Print(rsp)
+		ctr_type:= api.Check_Type_Control(payload)
+		if ctr_type==1 {
+			rsp, datquery, uid, cid := api.MControlRespondHandle(payload)
+			fmt.Print("uiddddd", uid)
+			//		redis.GetControlSignalExpire(datquery.Did)
+
+			payl, _ := json.Marshal(rsp)
+			topic := cid + "/RMCONTROL"
+			client.Publish(topic, 0, false, payl)
+
+			msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
+
+			paylsync,_:=json.Marshal(msyncdata)
+			topicsync:=datquery.Hid+"/MSYNC"
+
+			//Sync to mobile
+			if rsp.Rcode==200 {
+				client.Publish(topicsync,0,false,paylsync)
+			}
+		}else {
+
+			rsp, datquery := api.ControlDevice(payload)
+			fmt.Print(rsp)
 
 
-		payl,_:= json.Marshal(rsp)
-		cid:=info.Cid
-		topic:=cid+"/RCONTROL"
-		client.Publish(topic,0,false,payl)
+			payl,_ := json.Marshal(rsp)
+			cid:= info.Cid
+			topic := cid+"/RCONTROL"
+			client.Publish(topic, 0, false, payl)
 
-		msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
+			msyncdata:= api.MSync(datquery.Hid,datquery.Did,datquery.Status)
 
-		paylsync,_:=json.Marshal(msyncdata)
-		topicsync:=datquery.Hid+"/MSYNC"
+			paylsync,_:=json.Marshal(msyncdata)
+			topicsync:=datquery.Hid+"/MSYNC"
 
-		//Sync to mobile
-		if rsp.Rcode==200 {
-			client.Publish(topicsync,0,false,paylsync)
+			//Sync to mobile
+			if rsp.Rcode==200 {
+				client.Publish(topicsync,0,false,paylsync)
+			}
 		}
 
+
+
 	case "SCONTROL":
-		client.Publish(info.Cid+"/RSCONTROL",0,false,payload)
+		client.Publish(info.Cid+"/CONTROL",0,false,payload)
 
 
 	case "HGOOFF":

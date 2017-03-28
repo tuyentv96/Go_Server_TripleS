@@ -50,7 +50,7 @@ func GetAllDevice(hid string)  (ldevice []model.Device,err bool){
 	defer Db.Close()
 
 
-	if err := Db.C("devices").Find(bson.M{"hid": hid}).All(&ldevice); err != nil {
+	if err := Db.C("devices").Find(bson.M{"hid": hid}).Sort("dname").All(&ldevice); err != nil {
 		print("Fail")
 		return ldevice,true
 
