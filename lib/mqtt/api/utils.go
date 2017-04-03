@@ -9,7 +9,7 @@ import (
 )
 
 const	(
-	Mqttbroker="tcp://trantuyen.name.vn:1883"
+	Mqttbroker="tcp://127.0.0.1:1883"
 )
 
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")

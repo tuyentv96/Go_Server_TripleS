@@ -13,7 +13,7 @@ type redisDb struct {
 
 func InitRedisDb() {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "trantuyen.name.vn:6379",
+		Addr:     "127.0.0.1:6379",
 		Password: "", // no password set
 		DB:       0,  // use default DB
 

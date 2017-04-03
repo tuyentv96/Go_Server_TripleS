@@ -140,7 +140,7 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 
 	}
 
-	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status)
+	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status,uid)
 	if updateerr {
 		ret.Rcode=400
 		return ret,m,"",""
@@ -178,7 +178,7 @@ func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
 
 	}
 
-	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status)
+	updateerr:= dbapi.UpdateStatusDevice(m.Did,m.Status,"root")
 	if updateerr {
 		ret.Rcode=400
 		return ret,m

@@ -5,6 +5,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"../../mongo/db"
 	model "../../mongo/model"
+	"time"
 )
 
 func GetDeviceByDid(data string)  (model.Device,bool){
@@ -59,12 +60,25 @@ func GetAllHomeByUid(uid string)  (model.Userpsmdevice,bool){
 
 }
 
-func UpdateStatusDevice(did string,status int)  bool{
+func UpdateStatusDevice(did string,status int,uid string)  bool{
 	id := did
 	Db := db.MgoDb{}
 	Db.Init()
 	defer Db.Close()
 
+	dev:= model.Device{}
+
+	//Check status
+	if err := Db.C("devices").Find(bson.M{"did": did}).One(&dev); err != nil {
+		print("Fail")
+		return true
+	}
+
+	if dev.Status==status {
+		return true
+	}
+
+	//Update status
 	colQuerier := bson.M{"did": id}
 	change := bson.M{"$set": bson.M{"status": status}}
 
@@ -72,6 +86,20 @@ func UpdateStatusDevice(did string,status int)  bool{
 		print("Fail")
 		return true
 	}
-
+	dev.Status=status
+	SaveHistoryDevice(dev,uid)
 	return false
+}
+
+func SaveHistoryDevice(dev model.Device,uid string)  {
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+
+	if err := Db.C("history").Insert(model.HistoryDevice{Hid:dev.Hid,Did:dev.Did,Status:dev.Status,Dname:dev.Dname,Type:dev.Type,Uid:uid,Time:time.Now().Unix()}); err != nil {
+		print("Fail")
+
+	}
+
+
 }

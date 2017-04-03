@@ -70,7 +70,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		ctr_type:= api.Check_Type_Control(payload)
 		if ctr_type==1 {
 			rsp, datquery, uid, cid := api.MControlRespondHandle(payload)
-			fmt.Print("uiddddd", uid)
+			fmt.Print("mcontrol", uid)
 			//		redis.GetControlSignalExpire(datquery.Did)
 
 			payl, _ := json.Marshal(rsp)
@@ -89,7 +89,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 		}else {
 
 			rsp, datquery := api.ControlDevice(payload)
-			fmt.Print(rsp)
+			fmt.Print("ctonrol",rsp,datquery)
 
 
 			payl,_ := json.Marshal(rsp)

@@ -30,4 +30,14 @@ type LHomeDevice struct {
 	Ldevice []Device `json:"ldevice"`
 }
 
+type HistoryDevice struct {
+	Did     string `json:"did" bson:"did"`
+	Hid     string `json:"hid" bson:"hid"`
+	Dname   string `json:"dname" bson:"dname"`
+	Status  int `json:"status" bson:"status"`
+	Type  int `json:"type" bson:"type"`
+	Uid  string `json:"uid" bson:"uid"`
+	Time int64 `json:"time" bson:"time"`
+}
+
 

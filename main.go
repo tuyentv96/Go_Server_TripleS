@@ -18,6 +18,7 @@ func main() {
 
 	mqttlib.InitMqtt()
 
+
 	// Loop forever
 	select {
 	}
