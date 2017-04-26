@@ -27,6 +27,44 @@ func GetDeviceByDid(data string)  (model.Device,bool){
 	
 }
 
+func CheckDeviceStatusByDid(did string,status int)  (bool){
+
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+	result := model.Device{}
+
+	if err := Db.C("devices").Find(bson.M{"did": did}).One(&result); err != nil {
+		// Device id not found
+		return true
+	}
+
+	if status==result.Status {
+		return true
+	}
+
+	//Status not match
+	return false
+
+}
+
+func GetHomeIDByDid(did string)  (string){
+
+	Db := db.MgoDb{}
+	Db.Init()
+	defer Db.Close()
+	result := model.Device{}
+
+	if err := Db.C("devices").Find(bson.M{"did": did}).One(&result); err != nil {
+		// Device id not found
+		return ""
+	}
+
+	//Status not match
+	return result.Hid
+
+}
+
 func GetAllDeviceByHid(hid string)  ([]model.Device,bool){
 	Db := db.MgoDb{}
 	Db.Init()

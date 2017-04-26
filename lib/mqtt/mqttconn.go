@@ -14,6 +14,7 @@ var topics  = map[string]byte{
 
 	"+/MLOGIN": 0,
 	"+/MCONTROL":   0,
+	"+/MCONTROLS":   0,
 	"+/RSCONTROL": 0,
 	"+/CONTROL": 0,
 	"+/SCONTROL": 0,

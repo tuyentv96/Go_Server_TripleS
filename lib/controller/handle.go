@@ -47,6 +47,13 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		}
 		break
+
+	case "MCONTROLS":
+		print("McontrolS handler")
+		data:= api.MControlsHandle(payload)
+		payl,_:= json.Marshal(data)
+		client.Publish(data.Hid+"/SCONTROLS",0,false,payl)
+		break
 /*
 	case "RSCONTROL":
 		println("RSCONTROL topic")
@@ -68,6 +75,7 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 	case "CONTROL":
 		ctr_type:= api.Check_Type_Control(payload)
+		println("Control type:",ctr_type)
 		if ctr_type==1 {
 			rsp, datquery, uid, cid := api.MControlRespondHandle(payload)
 			fmt.Print("mcontrol", uid)

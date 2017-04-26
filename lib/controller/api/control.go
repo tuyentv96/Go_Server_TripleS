@@ -154,6 +154,44 @@ func MControlRespondHandle(payload []byte)  (modelctrl.Mcontrolrespond,modelctrl
 
 }
 
+func MControlsHandle(payload []byte)  (modelctrl.Mcontrols){
+
+	var m modelctrl.Mcontrols
+	ret_val:=modelctrl.Mcontrols{}
+	bytes:=	[]byte(payload)
+
+	err:=	json.Unmarshal(bytes,&m)
+
+
+	if err!=nil {
+		fmt.Print("Error json")
+		// Wrong format
+		return ret_val
+
+	}
+
+	ret_val.Hid=m.Hid
+	ret_val.Uid=m.Uid
+	fmt.Printf("%+v",m)
+
+	for index,dev := range m.Device {
+
+		if err:= dbapi.CheckDeviceStatusByDid(dev.Did,dev.Status); !err {
+			print(index)
+			if er:=redis.TimerDeviceIsControlling(dev.Did);!er {
+				redis.TimerSaveControlSignalExpire(m.Uid,dev.Did,dev.Status)
+				//Add to array
+				ret_val.Device=append(ret_val.Device,dev)
+			}
+		}
+	}
+
+	return ret_val
+
+
+
+}
+
 func ControlDevice(payload []byte)  (modelctrl.Controlrsp,modelctrl.Control){
 
 	var m modelctrl.Control
