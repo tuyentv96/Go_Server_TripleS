@@ -22,6 +22,7 @@ var topics  = map[string]byte{
 	"+/HGOON": 0,
 	"+/MGETDEVICE": 0,
 	"+/GETDEVICE": 0,
+	"+/UPDATEPOWER": 0,
 
 }
 

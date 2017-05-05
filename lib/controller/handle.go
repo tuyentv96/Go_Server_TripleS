@@ -152,8 +152,27 @@ func  HandleRequest(client MQTT.Client,info model.RqDetail,payload []byte)   {
 
 		client.Publish(info.Cid+"/RGETDEVICE",0,false,payl)
 
+	case "UPDATEPOWER":
+		println("update power !!!")
+		rsp,data,err:= api.UpdatePowerDevice(payload)
+
+		pay,_ := json.Marshal(rsp)
+		client.Publish(info.Cid+"/RUPDATEPOWER",0,false,pay)
+
+		if err!=nil {
+			return
+		}
+
+		payl,_ := json.Marshal(model.MSyncPower{Title:"MSYNCPOWER",Hid:data.Hid,Did:data.Did,Power:data.Power})
+
+		client.Publish(info.Cid+"/MSYNCPOWER",0,false,payl)
+
+
 
 	default:
 		print("Topic not found")
 	}
+
+
+	return
 }
