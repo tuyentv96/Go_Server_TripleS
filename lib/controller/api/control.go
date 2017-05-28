@@ -93,7 +93,7 @@ func Check_Type_Control(payload []byte)  int{
 
 	}
 
-	uid,cid,rderr:= redis.GetControlSignalExpire(m.Did)
+	uid,cid,rderr:= redis.GetControlSignalExpireNoDel(m.Did)
 
 	print("uidneee",uid,cid,rderr)
 

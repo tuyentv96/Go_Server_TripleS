@@ -1,20 +1,10 @@
 <component name="libraryTable">
   <library name="GOPATH &lt;Go&gt;">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../src/apis" />
-      <root url="file://$PROJECT_DIR$/../src/bapi" />
-      <root url="file://$PROJECT_DIR$/../src/timer" />
-      <root url="file://$PROJECT_DIR$/../src/github.com" />
-      <root url="file://$PROJECT_DIR$/../src/golang.org" />
-      <root url="file://$PROJECT_DIR$/../src/restful" />
+      <root url="file://$USER_HOME$/go/src/github.com" />
     </CLASSES>
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/../src/apis" />
-      <root url="file://$PROJECT_DIR$/../src/bapi" />
-      <root url="file://$PROJECT_DIR$/../src/timer" />
-      <root url="file://$PROJECT_DIR$/../src/github.com" />
-      <root url="file://$PROJECT_DIR$/../src/golang.org" />
-      <root url="file://$PROJECT_DIR$/../src/restful" />
+      <root url="file://$USER_HOME$/go/src/github.com" />
     </SOURCES>
     <excluded>
       <root url="file://$PROJECT_DIR$" />
