@@ -1,6 +1,5 @@
 package conf
 
-<<<<<<< HEAD
 const	(
 	Mqtt_broker="tcp://127.0.0.1:1883"
 	Redis_server="127.0.0.1:6379"
@@ -8,9 +7,8 @@ const	(
 	Mongodb_database     = "quanlynha"
 )
 
-=======
 const (
 	mqtt_broker="127.0.0.1"
 
 )
->>>>>>> origin/master
+
