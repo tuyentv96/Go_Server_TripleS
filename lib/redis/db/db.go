@@ -3,6 +3,7 @@ package redis
 import (
 	"github.com/go-redis/redis"
 	"fmt"
+	conf "Go_Server_tripleS/conf"
 )
 
 var RedisMainCli *redis.Client
@@ -13,7 +14,7 @@ type redisDb struct {
 
 func InitRedisDb() {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "127.0.0.1:6379",
+		Addr:     conf.Redis_server,
 		Password: "", // no password set
 		DB:       0,  // use default DB
 

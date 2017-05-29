@@ -1,7 +1,7 @@
 package model
 
 import (
-	dbmodel "../../mongo/model"
+	dbmodel "Go_Server_tripleS/lib/mongo/model"
 
 )
 

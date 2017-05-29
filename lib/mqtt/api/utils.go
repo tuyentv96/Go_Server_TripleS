@@ -1,15 +1,10 @@
 package api
 
 import (
-	model "../../controller/model"
+	model "Go_Server_tripleS/lib/controller/model"
 	"strings"
-
 	"math/rand"
 
-)
-
-const	(
-	Mqttbroker="tcp://127.0.0.1:1883"
 )
 
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")

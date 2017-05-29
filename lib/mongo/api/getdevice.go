@@ -3,8 +3,8 @@ package api
 import (
 
 	"gopkg.in/mgo.v2/bson"
-	"../../mongo/db"
-	model "../../mongo/model"
+	"Go_Server_tripleS/lib/mongo/db"
+	model "Go_Server_tripleS/lib/mongo/model"
 )
 
 func MGetAllDevice(data string)  (model.LDevice,bool){

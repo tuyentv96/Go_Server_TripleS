@@ -1,7 +1,7 @@
 package api
 
 import (
-	db "../../redis/db"
+	db "Go_Server_tripleS/lib/redis/db"
 	"time"
 )
 
@@ -28,6 +28,22 @@ func DeviceIsControlling(did string)  bool{
 
 	return false
 
+}
+
+func GetControlSignalExpireNoDel(did string)  (uid string,cid string,err bool){
+
+	//status= db.RedCli().Get(did+"S").Val()
+	uid= db.RedCli().Get(did+"U").Val()
+	cid= db.RedCli().Get(did+"I").Val()
+
+	if cid=="" {
+		return uid,cid,true
+	}
+
+
+	print(uid,cid)
+
+	return uid,cid,false
 }
 
 func GetControlSignalExpire(did string)  (uid string,cid string,err bool){

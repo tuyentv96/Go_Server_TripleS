@@ -3,10 +3,10 @@ package api
 
 import (
 
-	modelctrl "../../controller/model"
-	dbapi "../../mongo/api"
+	modelctrl "Go_Server_tripleS/lib/controller/model"
+	dbapi "Go_Server_tripleS/lib/mongo/api"
 	"encoding/json"
-	redis "../../redis/api"
+	redis "Go_Server_tripleS/lib/redis/api"
 	"fmt"
 )
 
@@ -93,7 +93,7 @@ func Check_Type_Control(payload []byte)  int{
 
 	}
 
-	uid,cid,rderr:= redis.GetControlSignalExpire(m.Did)
+	uid,cid,rderr:= redis.GetControlSignalExpireNoDel(m.Did)
 
 	print("uidneee",uid,cid,rderr)
 

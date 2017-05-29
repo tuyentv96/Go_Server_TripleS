@@ -2,9 +2,9 @@ package api
 
 import (
 
-	modelconn "../../controller/model"
-	dbapi "../../mongo/api"
-	modeldb "../../mongo/model"
+	modelconn "Go_Server_tripleS/lib/controller/model"
+	dbapi "Go_Server_tripleS/lib/mongo/api"
+	modeldb "Go_Server_tripleS/lib/mongo/model"
 
 //	"fmt"
 	"encoding/json"

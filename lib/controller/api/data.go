@@ -1,8 +1,8 @@
 package api
 
 import (
-	modelctrl "../../controller/model"
-	dbapi "../../mongo/api"
+	modelctrl "Go_Server_tripleS/lib/controller/model"
+	dbapi "Go_Server_tripleS/lib/mongo/api"
 	"encoding/json"
 
 )

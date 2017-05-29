@@ -3,8 +3,8 @@ package controller
 import (
 	"fmt"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	model "./model"
-	api "./api"
+	model "Go_Server_tripleS/lib/controller/model"
+	api "Go_Server_tripleS/lib/controller/api"
 	"encoding/json"
 	//mqttlib "../mqtt/api"
 

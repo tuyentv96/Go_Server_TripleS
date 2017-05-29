@@ -2,11 +2,12 @@ package db
 
 import (
 	"gopkg.in/mgo.v2"
+	conf "Go_Server_tripleS/conf"
 )
 
 const (
-	Host         = "mongodb://localhost:27017"
-	Database     = "quanlynha"
+	Host         = conf.Mongodb_host
+	Database     = conf.Mongodb_database
 	AuthDatabase = "authdb"
 	AuthUserName = "root"
 	AuthPassword = "pass"

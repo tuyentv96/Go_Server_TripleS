@@ -2,12 +2,13 @@ package mqtt
 
 import (
 	MQTT "github.com/eclipse/paho.mqtt.golang"
-	handler "../../lib/controller"
-	model "../../lib/controller/model"
+	handler "Go_Server_tripleS/lib/controller"
+	model "Go_Server_tripleS/lib/controller/model"
 	"fmt"
-	utils "./api"
+	utils "Go_Server_tripleS/lib/mqtt/api"
 	"os"
 	"time"
+	conf "Go_Server_tripleS/conf"
 )
 
 var topics  = map[string]byte{
@@ -66,7 +67,7 @@ func mqttLostConnect(client MQTT.Client,err error) {
 func InitMqtt()  {
 	cid:= string(string(time.Now().Unix())+utils.RandStringRunes(12))
 	print("cid:",cid)
-	opts := MQTT.NewClientOptions().AddBroker(utils.Mqttbroker)
+	opts := MQTT.NewClientOptions().AddBroker(conf.Mqtt_broker)
 	opts.SetClientID(cid)
 	opts.SetDefaultPublishHandler(mqttReceive)
 	opts.SetAutoReconnect(true)

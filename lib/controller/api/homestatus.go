@@ -1,7 +1,7 @@
 package api
 
 import (
-	modelctrl "../../controller/model"
+	modelctrl "Go_Server_tripleS/lib/controller/model"
 	"encoding/json"
 )
 
