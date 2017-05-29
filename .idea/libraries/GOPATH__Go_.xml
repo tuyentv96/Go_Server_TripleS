@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="GOPATH &lt;Go&gt;">
     <CLASSES>
+<<<<<<< HEAD
       <root url="file://$PROJECT_DIR$/../apis" />
       <root url="file://$PROJECT_DIR$/../bapi" />
       <root url="file://$PROJECT_DIR$/../timer" />
@@ -15,6 +16,12 @@
       <root url="file://$PROJECT_DIR$/../github.com" />
       <root url="file://$PROJECT_DIR$/../golang.org" />
       <root url="file://$PROJECT_DIR$/../restful" />
+=======
+      <root url="file://$USER_HOME$/go/src/github.com" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$USER_HOME$/go/src/github.com" />
+>>>>>>> origin/master
     </SOURCES>
     <excluded>
       <root url="file://$PROJECT_DIR$" />
