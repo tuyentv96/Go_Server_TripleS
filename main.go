@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	// Test
 	// Create Power Record for new day
 	cron := cron.New()
 	cron.AddFunc("0 0 0 * * *", func() { mg.InitPowerDevice() })
